@@ -537,7 +537,7 @@ const WORD_DB={
     {jp:"感情",en:"emotion",hint:"きもち ❤️"},{jp:"強調する",en:"emphasize",hint:"どうさ 📢"},
     {jp:"平等",en:"equality",hint:"かんがえ ⚖️"},{jp:"証拠",en:"evidence",hint:"ちしき 🔍"},
     {jp:"表現する",en:"express",hint:"どうさ 💬"},{jp:"柔軟な",en:"flexible",hint:"ようす 🌊"},
-    {jp:"世代",en:"generation",hint:"じかん 👨‍👩‍👧‍👦"},{jp:"地球温暖化",en:"global warming",hint:"かんきょう 🌡"},
+    {jp:"世代",en:"generation",hint:"じかん 👨‍👩‍👧‍👦"},{jp:"地球温暖化",en:"globalwarming",hint:"かんきょう 🌡"},
     {jp:"影響",en:"influence",hint:"こうか 💫"},{jp:"基盤",en:"foundation",hint:"もの 🏗"},
     {jp:"革新",en:"innovation",hint:"かんがえ 💡"},{jp:"持続可能な",en:"sustainable",hint:"かんきょう 🌿"},
     {jp:"責任",en:"responsibility",hint:"こうどう 📋"},{jp:"解決策",en:"solution",hint:"かんがえ ✅"},
@@ -671,7 +671,8 @@ function onInput(){
   const inp=document.getElementById('ans-input');
   // Apple Pencil入力の先頭大文字を自動で小文字に変換
   const pos=inp.selectionStart;
-  inp.value=inp.value.toLowerCase();
+  // 半角英字とスペース以外を除去してから小文字変換
+  inp.value=inp.value.replace(/[^a-zA-Z]/g,'').toLowerCase();
   inp.setSelectionRange(pos,pos);
   const empty=inp.value.length===0;
   document.getElementById('btn-sub').disabled=empty;
