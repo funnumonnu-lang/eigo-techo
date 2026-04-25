@@ -654,7 +654,12 @@ function loadQ(){
 }
 function onInput(){
   if(answered)return;
-  document.getElementById('btn-sub').disabled=document.getElementById('ans-input').value.length===0;
+  const inp=document.getElementById('ans-input');
+  // Apple Pencil入力の先頭大文字を自動で小文字に変換
+  const pos=inp.selectionStart;
+  inp.value=inp.value.toLowerCase();
+  inp.setSelectionRange(pos,pos);
+  document.getElementById('btn-sub').disabled=inp.value.length===0;
 }
 function onKey(e){
   if(e.key==='Enter'){
@@ -674,7 +679,7 @@ function submitAnswer(){
   answered=true;
   const q=qs[idx];
   const userAns=document.getElementById('ans-input').value;
-  const ok=userAns.trim()===q.en;
+  const ok=userAns.trim().toLowerCase()===q.en.toLowerCase();
   if(ok){score++;}else{wrongs.push(q);}
   results.push({jp:q.jp,en:q.en,userAns,ok});
   const inp=document.getElementById('ans-input');
